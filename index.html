@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego de Adivinar la Canción</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 50px;
+      background-color:cadetblue;
+    }
+    h1{
+       
+        font-family: fantasy;
+        text-shadow: 1px,1px,1px,red;
+    }
+
+    #game-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-family: fantasy;
+      font-size: 23px;
+    }
+    p{
+        color: rgb(232, 109, 15);
+        background-color: bisque;
+        font-family: cursive;
+    }
+    table{
+        background-color: bisque;
+        font-size: 18px;
+        font-family: cursive;
+
+    }
+button{
+    background-color: beige;
+    font-size: 24px;
+    font-family: fantasy;
+}
+  </style>
+</head>
+<body>
+    <center>
+    <h1>Juego de Adivinar la Canción de Taylor Swift</h1>
+    <p>Por favor escribe la respuesta en minuscula. Muchas gracias.(>‿◠)✌ </p>
+<div id="game-container">
+    <table border="3">
+  <tr>
+    <td>
+  <div id="lyrics-container">
+    <p id="current-lyric"></p>
+  </div>
+</td>
+</tr>
+<tr>
+    <td>
+  <label for="guess">Nombre de la Canción:</label>
+  <input type="text" id="guess" placeholder="Escribe tu respuesta">
+</td>
+</tr>
+<tr>
+ <td>
+    <center>
+    <button onclick="nextLyric()">Siguiente</button>
+    </center>
+</td>
+</tr>
+<tr>
+    <td>
+  <p id="result"></p>
+</td>
+</tr>
+</table>
+</div>
+</center>
+
+<script>
+  var lyrics = [
+    
+    "Can I go where you go? Can we always be this close, forever and ever? And ah, take me out, and take me home",
+    "This night is sparkling Don't you let it go I'm wonderstruck Blushing all the way home I'll spend forever Wondering if you knew I was enchanted to meet you",
+    "A friend to all is a friend to none Chase two girls, lose the one When you are young, they assume you know nothing",
+    // Agrega más letras según sea necesario
+  ];
+
+  var correctAnswers = [
+    "lover",
+    "enchanted",
+    "call me maybe",
+    // Agrega más respuestas según sea necesario
+  ];
+
+  var currentLyricIndex = 0;
+  var totalCorrectAnswers = 0;
+
+  function nextLyric() {
+    var userGuess = document.getElementById("guess").value.toLowerCase();
+    var currentCorrectAnswer = correctAnswers[currentLyricIndex];
+
+    if (userGuess === currentCorrectAnswer) {
+      totalCorrectAnswers++;
+    }
+
+    currentLyricIndex++;
+
+    if (currentLyricIndex < lyrics.length) {
+      startNewLyric();
+    } else {
+      showFinalResult();
+    }
+  }
+
+  function startNewLyric() {
+    document.getElementById("guess").value = "";
+    document.getElementById("result").innerHTML = "";
+    document.getElementById("current-lyric").innerHTML = lyrics[currentLyricIndex];
+  }
+
+  function showFinalResult() {
+    document.getElementById("result").innerHTML = "¡Felicidades! Has completado el juego. Puntuación final: " + totalCorrectAnswers + "/" + lyrics.length + ".";
+  }
+
+  // Inicia el juego mostrando la primera letra
+  startNewLyric();
+</script>
+
+</body>
+</html>
